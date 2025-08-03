@@ -59,15 +59,6 @@ class Pipe(pygame.sprite.Sprite):
         self.rect[0] -= X_SPEED
 
 
-def get_random_pipes(xpos: int) -> list[Pipe]:
-    pipe_gap = random.randint(PIPE_GAP_MIN, PIPE_GAP_MAX)
-    bottom_pipe_height = random.randint(PIPE_MIN_HEIGHT, PIPE_MAX_HEIGHT)
-    top_pipe_height = SCREEN_HEIGHT - bottom_pipe_height - pipe_gap
-    bottom_pipe = Pipe(inverted=False, x_pos=xpos, y_size=bottom_pipe_height)
-    top_pipe = Pipe(inverted=True, x_pos=xpos, y_size=top_pipe_height)
-    return [bottom_pipe, top_pipe]
-
-
 class Ground(pygame.sprite.Sprite):
 
     def __init__(self, xpos: int):
@@ -84,7 +75,3 @@ class Ground(pygame.sprite.Sprite):
 
     def update(self):
         self.rect[0] -= X_SPEED
-
-
-def is_off_screen(sprite) -> bool:
-    return (sprite.rect[0] + sprite.rect[2] < 0)

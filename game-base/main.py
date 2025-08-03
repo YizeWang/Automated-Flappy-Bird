@@ -61,11 +61,19 @@ while True:
 
     screen.blit(BACKGROUND, (0, 0))
 
-    remove_and_create_ground(ground_group)    
+    remove_and_create_ground(ground_group)
     remove_and_create_pipes(pipe_group)
+
+    pipe_gap_rects = get_pipe_gap_rects(pipe_group)
+
 
     update_and_draw_groups(screen, [pipe_group, ground_group, bird_group])
 
+    print(f'Frame: {frame}')
+    for rect in pipe_gap_rects:
+        print(rect)
+        pygame.draw.rect(screen, pygame.Color(255, 0, 0), rect, 1)
+    
     debug_text = f'Frame: {frame}'
 
     text = font.render(debug_text, True, GREEN, WHITE)
