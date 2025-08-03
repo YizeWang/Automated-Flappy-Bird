@@ -87,7 +87,8 @@ while True:
     pygame.display.update()
 
     if (pygame.sprite.groupcollide(bird_group, ground_group, False, False, pygame.sprite.collide_mask) or
-            pygame.sprite.groupcollide(bird_group, pipe_group, False, False, pygame.sprite.collide_mask)):
+            pygame.sprite.groupcollide(bird_group, pipe_group, False, False, pygame.sprite.collide_mask)or
+            bird_group.sprites()[0].hit_boundaries()):
         pygame.mixer.Sound(HIT_AUDIO).play()
         time.sleep(1)
         # pygame.mixer.Sound(FAILURE_AUDIO).play()   

@@ -29,6 +29,9 @@ class Bird(pygame.sprite.Sprite):
     def flap(self):
         self.y_speed = -FLAP_Y_SPEED
 
+    def hit_boundaries(self) -> bool:
+        return (self.rect[1] < 0 or self.rect[1] > SCREEN_HEIGHT)
+
 
 class Pipe(pygame.sprite.Sprite):
 
