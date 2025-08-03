@@ -2,12 +2,7 @@ from agents import *
 from pygame.locals import *
 from constants import *
 import time
-
-
-def update_and_draw_groups(groups: list[pygame.sprite.Group]):
-    for group in groups:
-        group.update()
-        group.draw(screen)
+from game_core import *
 
 
 pygame.mixer.init()
@@ -24,20 +19,10 @@ clock = pygame.time.Clock()
 
 font = pygame.font.Font('freesansbold.ttf', 24)
 
-bird = Bird()
-bird_group = pygame.sprite.Group()
-bird_group.add(bird)
-
-ground_group = pygame.sprite.Group()
-for i in range(2):
-    ground = Ground(GROUND_WIDTH * i)
-    ground_group.add(ground)
-
-pipe_group = pygame.sprite.Group()
-for i in range(SCREEN_WIDTH // PIPE_X_DISTANCE):
-    pipes = get_random_pipes(SCREEN_WIDTH + i * PIPE_X_DISTANCE)
-    pipe_group.add(pipes[0])
-    pipe_group.add(pipes[1])
+bird_group = init_bird_group()
+bird = bird_group.sprites()[0]
+ground_group = init_ground_group()
+pipe_group = init_pipe_group()
 
 
 clock = pygame.time.Clock()
@@ -76,22 +61,10 @@ while True:
 
     screen.blit(BACKGROUND, (0, 0))
 
-    if is_off_screen(ground_group.sprites()[0]):
-        ground_group.remove(ground_group.sprites()[0])
+    remove_and_create_ground(ground_group)    
+    remove_and_create_pipes(pipe_group)
 
-        new_ground = Ground(GROUND_WIDTH - 20)
-        ground_group.add(new_ground)
-
-    if is_off_screen(pipe_group.sprites()[0]):
-        pipe_group.remove(pipe_group.sprites()[0])
-        pipe_group.remove(pipe_group.sprites()[0])
-
-        pipes = get_random_pipes(SCREEN_WIDTH)
-
-        pipe_group.add(pipes[0])
-        pipe_group.add(pipes[1])
-
-    update_and_draw_groups([pipe_group, ground_group, bird_group])
+    update_and_draw_groups(screen, [pipe_group, ground_group, bird_group])
 
     debug_text = f'Frame: {frame}'
 
