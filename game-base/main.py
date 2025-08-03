@@ -1,7 +1,7 @@
 from agents import *
 from pygame.locals import *
 from constants import *
-
+import time
 
 pygame.mixer.init()
 pygame.init()
@@ -76,7 +76,6 @@ while True:
     ground_group.draw(screen)
  
     debug_text = f'Frame: {frame}'
-    print(debug_text)
 
     text = font.render(debug_text, True, GREEN, WHITE)
     textRect = text.get_rect()
