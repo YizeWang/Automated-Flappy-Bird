@@ -1,8 +1,8 @@
-from agents import *
+from game_base.agents import *
 from pygame.locals import *
-from constants import *
+from game_base.constants import *
 import time
-from game_core import *
+from game_base.game_core import *
 
 
 pygame.mixer.init()
@@ -67,12 +67,12 @@ while True:
     pipe_gap_rects = get_pipe_gap_rects(pipe_group)
 
 
+    print(f'Frame: {frame}')
+    print(f'Bird: {bird_group.sprites()[0].rect}')
     update_and_draw_groups(screen, [pipe_group, ground_group, bird_group])
 
-    print(f'Frame: {frame}')
     for rect in pipe_gap_rects:
-        print(rect)
-        pygame.draw.rect(screen, pygame.Color(255, 0, 0), rect, 1)
+        pygame.draw.rect(screen, RED, rect, 3)
     
     debug_text = f'Frame: {frame}'
 

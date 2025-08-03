@@ -1,7 +1,6 @@
+from game_base.constants import *
+
 import pygame
-import random
-from constants import *
-from pygame.locals import *
 
 
 class Bird(pygame.sprite.Sprite):

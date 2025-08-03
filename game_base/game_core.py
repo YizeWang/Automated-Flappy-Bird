@@ -1,8 +1,8 @@
-from agents import *
-from pygame.locals import *
-from constants import *
-import time
+from game_base.agents import *
+from game_base.constants import *
+
 import pygame
+import random
 
 
 def get_random_pipes(xpos: int) -> list[Pipe]:
