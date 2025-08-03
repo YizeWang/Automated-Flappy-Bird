@@ -1,14 +1,14 @@
 # Game Parameters
-FPS = 20
-X_SPEED = 15
+FPS = 60
+X_SPEED = 5
 
 # Window parameters
 SCREEN_WIDTH = 1200
 SCREEN_HEIGHT = 600
 
 # Bird parameters
-FLAP_Y_SPEED = 15
-Y_GRAVITY = 1.8
+FLAP_Y_SPEED = 10
+Y_GRAVITY = 0.5
 BIRD_INIT_Y_POS = SCREEN_HEIGHT / 2
 BIRD_X_POS = SCREEN_WIDTH / 6
 
