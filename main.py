@@ -1,8 +1,11 @@
 from game_base.agents import *
-from pygame.locals import *
 from game_base.constants import *
-import time
 from game_base.game_core import *
+from algorithms.pid_controller import *
+
+from pygame.locals import *
+
+import time
 
 
 pygame.mixer.init()
@@ -46,6 +49,7 @@ while not_started:
     screen.blit(pygame.image.load(WELCOME_MAP).convert_alpha(), (0, 0))
     pygame.display.update()
 
+last_left_to_exit = True
 
 while True:
 
@@ -66,19 +70,30 @@ while True:
 
     pipe_gap_rects = get_pipe_gap_rects(pipe_group)
 
+    pid_controller = PIDController(kp=0.1, ki=0.0, kd=0.0)
 
-    print(f'Frame: {frame}')
-    print(f'Bird: {bird_group.sprites()[0].rect}')
+    target_y = pipe_gap_rects[0][1] + pipe_gap_rects[0][3] // 3 * 2
+    error = - target_y + bird_group.sprites()[0].rect[1]
+
+    left_to_exit = bird_group.sprites()[0].rect[0] < pipe_gap_rects[0][0] + PIPE_WIDTH
+    target_for_new_pipe = last_left_to_exit and not left_to_exit
+    pid_controller.update(target_for_new_pipe=target_for_new_pipe, error=error)
+    last_left_to_exit = left_to_exit
+
+    if pid_controller.flap():
+        bird.flap()
+        pygame.mixer.Sound(FLAP_AUDIO).play()
+
     update_and_draw_groups(screen, [pipe_group, ground_group, bird_group])
 
     for rect in pipe_gap_rects:
         pygame.draw.rect(screen, RED, rect, 3)
-    
-    debug_text = f'Frame: {frame}'
+
+    debug_text = f'Frame: {frame}, Error: {error}, Last: {last_left_to_exit}, Curr: {left_to_exit}, New: {target_for_new_pipe}'
 
     text = font.render(debug_text, True, GREEN, WHITE)
     textRect = text.get_rect()
-    textRect[0] = SCREEN_WIDTH // 2
+    textRect[0] = 0
     textRect[1] = 0
 
     screen.blit(text, textRect)

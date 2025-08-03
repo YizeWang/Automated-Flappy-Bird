@@ -1,6 +1,5 @@
 from game_base.agents import *
 from game_base.constants import *
-
 import pygame
 import random
 
