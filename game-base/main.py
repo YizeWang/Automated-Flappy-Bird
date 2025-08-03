@@ -13,7 +13,7 @@ def update_and_draw_groups(groups: list[pygame.sprite.Group]):
 pygame.mixer.init()
 pygame.init()
 
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), vsync=True)
 pygame.display.set_caption("Flappy Bird")
 
 BACKGROUND = pygame.image.load(BACKGROUND_MAP).convert_alpha()
@@ -42,8 +42,25 @@ for i in range(2):
 
 clock = pygame.time.Clock()
 
-begin = True
 frame = 0
+
+not_started = True
+
+while not_started:
+
+    clock.tick(FPS)
+
+    for event in pygame.event.get():
+        if event.type == QUIT:
+            pygame.quit()
+        if event.type == KEYDOWN and (event.key == K_SPACE or event.key == K_UP):
+            bird.flap()
+            pygame.mixer.Sound(FLAP_AUDIO).play()
+            not_started = False
+
+    screen.blit(pygame.image.load(WELCOME_MAP).convert_alpha(), (0, 0))
+    pygame.display.update()
+
 
 while True:
 
