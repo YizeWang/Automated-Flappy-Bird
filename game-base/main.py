@@ -3,6 +3,13 @@ from pygame.locals import *
 from constants import *
 import time
 
+
+def update_and_draw_groups(groups: list[pygame.sprite.Group]):
+    for group in groups:
+        group.update()
+        group.draw(screen)
+
+
 pygame.mixer.init()
 pygame.init()
 
@@ -67,14 +74,8 @@ while True:
         pipe_group.add(pipes[0])
         pipe_group.add(pipes[1])
 
-    bird_group.update(frame)
-    ground_group.update()
-    pipe_group.update()
+    update_and_draw_groups([pipe_group, ground_group, bird_group])
 
-    bird_group.draw(screen)
-    pipe_group.draw(screen)
-    ground_group.draw(screen)
- 
     debug_text = f'Frame: {frame}'
 
     text = font.render(debug_text, True, GREEN, WHITE)

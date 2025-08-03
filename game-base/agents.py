@@ -14,6 +14,8 @@ class Bird(pygame.sprite.Sprite):
 
         self.y_speed = 0
 
+        self.frame = 0
+
         self.image = self.images[0]
         self.mask = pygame.mask.from_surface(self.image)
 
@@ -21,10 +23,11 @@ class Bird(pygame.sprite.Sprite):
         self.rect[0] = BIRD_X_POS
         self.rect[1] = BIRD_INIT_Y_POS
 
-    def update(self, frame: int):
-        self.image = self.images[frame % len(self.images)]
+    def update(self):
+        self.image = self.images[self.frame]
         self.y_speed += Y_GRAVITY
         self.rect[1] += self.y_speed
+        self.frame = (self.frame + 1) % len(self.images)
 
     def flap(self):
         self.y_speed = -FLAP_Y_SPEED
