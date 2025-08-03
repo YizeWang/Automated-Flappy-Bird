@@ -24,18 +24,18 @@ PIPE_MAX_HEIGHT = 300
 PIPE_MIN_HEIGHT = 100
 
 # Audio files
-FLAP_AUDIO = 'game-base/assets/audio/wing.wav'
+FLAP_AUDIO = 'game-base/assets/audio/flap.wav'
 HIT_AUDIO = 'game-base/assets/audio/hit.wav'
 FAILURE_AUDIO = 'game-base/assets/audio/failure.wav'
 
 # Map files
-BACKGROUND_MAP = 'game-base/assets/background-day.png'
-WELCOME_MAP = 'game-base/assets/welcome.png'
-BLUEBIRD_DOWNFLAP_MAP = 'game-base/assets/bluebird-downflap.png'
-BLUEBIRD_MIDFLAP_MAP = 'game-base/assets/bluebird-midflap.png'
-BLUEBIRD_UPFLAP_MAP = 'game-base/assets/bluebird-upflap.png'
-PIPE_MAP = 'game-base/assets/pipe-green.png'
-GROUND_MAP = 'game-base/assets/base.png'
+BACKGROUND_MAP = 'game-base/assets/images/background-day.png'
+WELCOME_MAP = 'game-base/assets/images/welcome-page.png'
+BLUEBIRD_DOWNFLAP_MAP = 'game-base/assets/images/blue-bird-down-flap.png'
+BLUEBIRD_MIDFLAP_MAP = 'game-base/assets/images/blue-bird-middle-flap.png'
+BLUEBIRD_UPFLAP_MAP = 'game-base/assets/images/blue-bird-up-flap.png'
+PIPE_MAP = 'game-base/assets/images/green-pipe.png'
+GROUND_MAP = 'game-base/assets/images/ground.png'
 
 # Colors
 GREEN = (0, 255, 0)
