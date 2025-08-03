@@ -34,8 +34,8 @@ for i in range(2):
     ground_group.add(ground)
 
 pipe_group = pygame.sprite.Group()
-for i in range(2):
-    pipes = get_random_pipes(SCREEN_WIDTH * i + 800)
+for i in range(SCREEN_WIDTH // PIPE_X_DISTANCE):
+    pipes = get_random_pipes(SCREEN_WIDTH + i * PIPE_X_DISTANCE)
     pipe_group.add(pipes[0])
     pipe_group.add(pipes[1])
 
@@ -86,7 +86,7 @@ while True:
         pipe_group.remove(pipe_group.sprites()[0])
         pipe_group.remove(pipe_group.sprites()[0])
 
-        pipes = get_random_pipes(SCREEN_WIDTH * 2)
+        pipes = get_random_pipes(SCREEN_WIDTH)
 
         pipe_group.add(pipes[0])
         pipe_group.add(pipes[1])
@@ -97,7 +97,7 @@ while True:
 
     text = font.render(debug_text, True, GREEN, WHITE)
     textRect = text.get_rect()
-    textRect[0] = SCREEN_WIDTH //2
+    textRect[0] = SCREEN_WIDTH // 2
     textRect[1] = 0
 
     screen.blit(text, textRect)
@@ -105,11 +105,11 @@ while True:
     pygame.display.update()
 
     if (pygame.sprite.groupcollide(bird_group, ground_group, False, False, pygame.sprite.collide_mask) or
-            pygame.sprite.groupcollide(bird_group, pipe_group, False, False, pygame.sprite.collide_mask)or
+            pygame.sprite.groupcollide(bird_group, pipe_group, False, False, pygame.sprite.collide_mask) or
             bird_group.sprites()[0].hit_boundaries()):
         pygame.mixer.Sound(HIT_AUDIO).play()
         time.sleep(1)
-        # pygame.mixer.Sound(FAILURE_AUDIO).play()   
+        # pygame.mixer.Sound(FAILURE_AUDIO).play()
         break
 
     frame += 1
